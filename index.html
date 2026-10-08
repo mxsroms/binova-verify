@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0F1B26">
+<title>التحقق من المستند · BINOVA</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1B26'/%3E%3Cpath d='M20 33l8 8 16-18' fill='none' stroke='%2337C27E' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-arabic-400.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-arabic-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-arabic-600.woff2) format("woff2");font-weight:600;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-arabic-700.woff2) format("woff2");font-weight:700;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-latin-400.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-latin-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-latin-600.woff2) format("woff2");font-weight:600;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:"Plex Arabic";src:url(fonts/plex-latin-700.woff2) format("woff2");font-weight:700;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:"Plex Mono";src:url(fonts/plex-mono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+
+:root{
+  --bg:#EEF2F5; --surface:#FFFFFF; --surface2:#F6F8FA; --ink:#0F1B26; --muted:#5B6875; --faint:#8A96A3;
+  --line:#DDE3E9; --line2:#C9D2DA; --accent:#0B6E79; --accentTint:#E6F1F2;
+  --ok:#157F4A; --okDeep:#0E5E36; --okTint:#E3F4EA;
+  --bad:#C0262D; --badDeep:#8F1B21; --badTint:#FBE7E8;
+  --warn:#A65A00; --warnDeep:#7A4200; --warnTint:#FDF0DC;
+  --shadow:0 1px 2px rgba(15,27,38,.06),0 6px 20px rgba(15,27,38,.06);
+  --r:16px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0B1218; --surface:#141D25; --surface2:#1A242D; --ink:#E8EEF3; --muted:#9AA8B5; --faint:#6D7B88;
+    --line:#26323C; --line2:#33414D; --accentTint:#16303A;
+    --okTint:#12301F; --badTint:#3A1517; --warnTint:#33240F;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Plex Arabic","Segoe UI",Tahoma,system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+.num,.ltr{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.wrap{max-width:480px;margin:0 auto;padding:12px 14px calc(28px + env(safe-area-inset-bottom))}
+.hide{display:none!important}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 12px}
+.issuer{display:flex;align-items:center;gap:10px;min-width:0}
+.mono{flex:none;width:40px;height:40px;border-radius:11px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;letter-spacing:.5px}
+.issuer small{display:block;font-size:11.5px;color:var(--muted);line-height:1.2}
+.issuer b{display:block;font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.brand{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.4px;flex:none}
+.brand svg{width:15px;height:15px}
+
+/* verdict */
+.verdict{position:relative;overflow:hidden;border-radius:20px;padding:20px 18px 16px;color:#fff;background:var(--ok);box-shadow:0 10px 30px rgba(21,127,74,.28)}
+.verdict.bad{background:var(--bad);box-shadow:0 10px 30px rgba(192,38,45,.28)}
+.verdict.warn{background:var(--warn);box-shadow:0 10px 30px rgba(166,90,0,.26)}
+.verdict::after{content:"";position:absolute;inset-inline-start:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08)}
+.vrow{position:relative;display:flex;align-items:center;gap:14px}
+.vicon{flex:none;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center}
+.vicon svg{width:32px;height:32px}
+.vtitle{font-size:24px;font-weight:700;line-height:1.25}
+.vsub{font-size:14px;opacity:.92;margin-top:2px}
+.vmeta{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.18)}
+.pill svg{width:13px;height:13px}
+
+/* cards */
+.card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);margin-top:12px;overflow:hidden}
+.card.pad{padding:16px}
+.cap{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.2px}
+.sec{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px}
+.sec h2{font-size:15px;font-weight:700}
+.sec .cnt{font-size:12px;color:var(--muted);font-weight:600}
+
+.doc{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.doc h1{font-size:21px;font-weight:700;color:var(--accent);line-height:1.3}
+.doc .en{font-size:10.5px;font-weight:600;letter-spacing:1.6px;color:var(--faint);direction:ltr}
+.docno{text-align:left}
+.docno .cap{display:block}
+.docno b{font-size:26px;font-weight:700;line-height:1.1}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);margin:14px -16px -16px;border-top:1px solid var(--line)}
+.grid>div{background:var(--surface);padding:10px 16px}
+.grid b{display:block;font-size:14.5px;font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--okTint);color:var(--ok)}
+.chip.bad{background:var(--badTint);color:var(--bad)}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+
+.party b.name{display:block;font-size:19px;font-weight:700;line-height:1.35;margin-top:2px}
+.kv{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;color:var(--muted)}
+.kv span b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--surface2);border:1px solid var(--line);direction:ltr}
+
+/* items */
+.items{border-top:1px solid var(--line)}
+.it{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.it:last-child{border-bottom:0}
+.it .main{flex:1;min-width:0}
+.job{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accentTint);border-radius:7px;padding:2px 8px}
+.code{font-size:12.5px;font-weight:600;color:var(--muted);margin-inline-start:6px}
+.it .nm{font-size:13.5px;font-weight:500;margin-top:4px;line-height:1.4;overflow-wrap:anywhere}
+.it .qty{flex:none;text-align:left}
+.it .qty b{display:block;font-size:19px;font-weight:700;line-height:1.15}
+.it .qty small{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:2px;white-space:nowrap}
+.more{padding:10px 16px 14px;font-size:13px;color:var(--muted);text-align:center;border-top:1px dashed var(--line2)}
+
+.totals{display:grid;grid-template-columns:1.25fr 1fr;gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.totals>div{background:var(--surface2);padding:12px 16px}
+.totals .big{background:var(--accent);color:#fff}
+.totals .big .cap{color:rgba(255,255,255,.78)}
+.totals b{display:block;font-size:20px;font-weight:700;line-height:1.2;margin-top:2px}
+.totals b small{font-size:12px;font-weight:500;opacity:.8}
+.totals .eq{font-size:13px;color:var(--muted);font-weight:600;margin-top:1px}
+
+/* people / transport */
+.row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row .ic{flex:none;width:38px;height:38px;border-radius:11px;background:var(--surface2);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.row .ic svg{width:20px;height:20px}
+.row .tx{flex:1;min-width:0}
+.row .tx b{display:block;font-size:15px;font-weight:600;line-height:1.35}
+.call{flex:none;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:13px;font-weight:700;color:var(--accent);border:1.5px solid var(--accent);padding:7px 12px;border-radius:10px}
+.call svg{width:15px;height:15px}
+.plate{display:inline-flex;flex-direction:column;border:2px solid var(--ink);border-radius:7px;overflow:hidden;min-width:132px;background:#fff;color:#0F1B26;margin-top:4px}
+.plate .eg{background:#3D8FD1;color:#fff;font-size:9.5px;font-weight:700;display:flex;justify-content:space-between;padding:1px 7px;letter-spacing:.5px}
+.plate .pv{font-size:17px;font-weight:700;text-align:center;padding:2px 10px;letter-spacing:1px}
+.trailer{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+.seal{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.seal code{font-family:"Plex Mono",ui-monospace,Consolas,monospace;font-size:16px;font-weight:500;letter-spacing:.5px;direction:ltr}
+.btn{text-decoration:none;appearance:none;border:1.5px solid var(--line2);background:var(--surface);color:var(--ink);font:inherit;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.btn svg{width:15px;height:15px}
+.btn.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.note{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.6}
+.note svg{flex:none;width:18px;height:18px;margin-top:2px}
+.actions{display:flex;gap:8px;margin-top:12px}
+.actions .btn{flex:1;justify-content:center;padding:11px 12px}
+.foot{margin-top:18px;text-align:center;font-size:11.5px;color:var(--faint);line-height:1.7}
+.foot b{color:var(--muted);font-weight:600}
+.alert{margin-top:12px;border-radius:var(--r);padding:12px 14px;font-size:13.5px;line-height:1.6;background:var(--badTint);color:var(--badDeep);font-weight:500}
+.alert.warn{background:var(--warnTint);color:var(--warnDeep)}
+@media (prefers-color-scheme:dark){.alert{color:#F3B5B8}.alert.warn{color:#F1C98E}}
+.dim .card:not(.keep){opacity:.55}
+
+/* landing */
+.land{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:30px 10px}
+.land .lg{width:76px;height:76px;border-radius:22px;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.land .lg svg{width:40px;height:40px}
+.land h1{font-size:22px;font-weight:700}
+.land p{color:var(--muted);font-size:14.5px;max-width:320px}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="land" id="landing">
+    <div class="lg"><svg viewBox="0 0 24 24" fill="none" stroke="#37C27E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></div>
+    <h1>التحقق من المستندات</h1>
+    <p>امسح رمز QR المطبوع على الإذن بكاميرا الموبايل لعرض بياناته والتأكد من أنه أصلي.</p>
+    <p style="font-size:12px;color:var(--faint)">BINOVA WMS</p>
+  </div>
+</div>
+
+<template id="tpl">
+  <header class="top">
+    <div class="issuer"><div class="mono" data-f="initials"></div><div><small data-f="issuerCap">صادر من</small><b data-f="issuer"></b></div></div>
+    <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تحقق رقمي</div>
+  </header>
+
+  <section class="verdict" data-f="verdict">
+    <div class="vrow">
+      <div class="vicon" data-f="vicon"></div>
+      <div><div class="vtitle" data-f="vtitle"></div><div class="vsub" data-f="vsub"></div></div>
+    </div>
+    <div class="vmeta">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg><span data-f="vpill"></span></span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-f="vtime"></span></span>
+    </div>
+  </section>
+  <div class="alert hide" data-f="alert"></div>
+
+  <section class="card pad keep">
+    <div class="doc">
+      <div><h1 data-f="title"></h1><div class="en" data-f="titleEn"></div></div>
+      <div class="docno"><span class="cap">رقم الإذن</span><b class="num" data-f="no"></b></div>
+    </div>
+    <div class="grid">
+      <div><span class="cap">التاريخ</span><b class="num" data-f="date"></b></div>
+      <div><span class="cap">الوقت</span><b data-f="time"></b></div>
+      <div><span class="cap">الحالة</span><b><span class="chip" data-f="status"></span></b></div>
+    </div>
+  </section>
+
+  <section class="card pad party" data-f="partyCard">
+    <span class="cap" data-f="partyCap">العميل</span>
+    <b class="name" data-f="party"></b>
+    <div class="kv" data-f="partyKv"></div>
+    <div class="tags" data-f="pos"></div>
+  </section>
+
+  <section class="card">
+    <div class="sec"><h2>الأصناف</h2><span class="cnt" data-f="itemsCnt"></span></div>
+    <div class="items" data-f="items"></div>
+    <div class="totals">
+      <div class="big"><span class="cap">إجمالي الكمية</span><b><span class="num" data-f="totQty"></span> <small data-f="unit"></small></b></div>
+      <div><span class="cap">البالتات</span><b class="num" data-f="totPal"></b><div class="eq" data-f="palEq"></div></div>
+    </div>
+  </section>
+
+  <section class="card" data-f="moveCard">
+    <div class="sec"><h2>النقل والتسليم</h2></div>
+    <div class="row" data-f="driverRow">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
+      <div class="tx"><span class="cap">السائق</span><b data-f="driver"></b></div>
+      <a class="call hide" data-f="driverCall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>اتصال</a>
+    </div>
+    <div class="row" data-f="plateRow">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V7a1 1 0 0 1 1-1h10v10M14 9h4l3 4v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+      <div class="tx"><span class="cap">العربية</span><div><div class="plate"><div class="eg"><span>EGYPT</span><span>مصر</span></div><div class="pv" data-f="plate"></div></div></div><div class="trailer" data-f="trailer"></div></div>
+    </div>
+    <div class="row" data-f="officerRow">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div>
+      <div class="tx"><span class="cap">مسؤول الشحن · حرّر الإذن واعتمده</span><b data-f="officer"></b></div>
+    </div>
+    <div class="row" data-f="keeperRow">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 20v-7h8v7"/></svg></div>
+      <div class="tx"><span class="cap">أمين المخزن · سلّم الأصناف</span><b data-f="keeper"></b></div>
+    </div>
+  </section>
+
+  <section class="card pad keep">
+    <div class="seal">
+      <div><span class="cap">الختم الرقمي</span><div><code data-f="seal"></code></div></div>
+      <button class="btn" type="button" data-f="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>نسخ</span></button>
+    </div>
+  </section>
+
+  <section class="card pad keep">
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>
+      <span data-f="noteText"></span></div>
+    <div class="actions">
+      <a class="btn primary hide" data-f="officeCall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>اتصال بمكتب الشحن</a>
+      <button class="btn" type="button" data-f="share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.9l7.6-4.3M8.2 13.1l7.6 4.3"/></svg>مشاركة</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>بيانات الإذن موجودة داخل رمز QR نفسه، وتم فحص التوقيع على جهازك دون إرسال البيانات لأي جهة.</div>
+    <div><b>BINOVA WMS</b> · توقيع رقمي ECDSA P-256</div>
+  </footer>
+</template>
+
+<script src="keys.js"></script>
+<script>
+(function(){
+  "use strict";
+  var KEYS = window.BINOVA_KEYS || {};
+  var US = "\x1f", RS = "\x1e", GS = "\x1d";
+  var TITLES_EN = {SHIP:"DELIVERY NOTE",TRANSFER:"TRANSFER NOTE",RETURN_FG:"RETURN NOTE",RETURN_HOLD:"RETURN NOTE",COLLECTION:"COLLECTION NOTE",
+    ADD_PROD:"GOODS RECEIPT NOTE",ADD_SORT:"GOODS RECEIPT NOTE",HOLD:"QUARANTINE NOTE",RELEASE:"RELEASE NOTE",SCRAP:"SCRAP NOTE",ADJUST:"STOCK ADJUSTMENT",LOC_MOVE:"LOCATION TRANSFER"};
+  var ICON_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var ICON_BAD = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7L7 17"/></svg>';
+  var ICON_WARN = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg>';
+
+  function b64urlBytes(s){
+    s = s.replace(/-/g,"+").replace(/_/g,"/");
+    while (s.length % 4) s += "=";
+    var bin = atob(s), out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  // B1 text encoding: ASCII as is, the Arabic block U+0600-U+067F in one byte
+  // (0x80 + offset), anything else as 0x1A + two bytes (UTF-16, big endian).
+  function decodeB1(b){
+    var out = "", i = 0, c;
+    while (i < b.length){
+      c = b[i++];
+      if (c === 0x1A){ if (i + 1 >= b.length + 1) throw new Error("format"); out += String.fromCharCode((b[i] << 8) | b[i + 1]); i += 2; }
+      else if (c >= 0x80) out += String.fromCharCode(0x0600 + c - 0x80);
+      else out += String.fromCharCode(c);
+    }
+    return out;
+  }
+  function hexBytes(h){
+    var out = new Uint8Array(h.length / 2);
+    for (var i = 0; i < out.length; i++) out[i] = parseInt(h.substr(i * 2, 2), 16);
+    return out;
+  }
+  function utf16le(str){
+    var b = new Uint8Array(str.length * 2);
+    for (var i = 0; i < str.length; i++){ var c = str.charCodeAt(i); b[2*i] = c & 255; b[2*i+1] = c >> 8; }
+    return b;
+  }
+  function fmt(n){
+    var v = Number(n); if (!isFinite(v)) return n || "";
+    return v.toLocaleString("en-US", {maximumFractionDigits: 3});
+  }
+  function initials(name){
+    var w = String(name || "").trim().split(/\s+/).filter(Boolean);
+    if (!w.length) return "B";
+    if (/^[A-Za-z]/.test(w[0])) return (w[0][0] + (w[1] ? w[1][0] : "")).toUpperCase();
+    return w.length > 1 ? w[0][0] + w[1][0] : w[0].slice(0, 2);
+  }
+  function timeAr(hh, mm){
+    var h = Number(hh), ap = h < 12 ? "ص" : "م";
+    h = h % 12; if (h === 0) h = 12;
+    return "⁦" + h + ":" + mm + "⁩ " + ap;
+  }
+  function phoneOf(s){
+    var first = String(s || "").split(/[\/,;|]/)[0];
+    var m = first.replace(/[^\d+]/g, "");
+    return m.length >= 6 ? m : "";
+  }
+
+  async function verifySig(pubHex, text, sig){
+    if (!window.crypto || !crypto.subtle) return null;
+    var raw = new Uint8Array(65); raw[0] = 4; raw.set(hexBytes(pubHex.slice(-128)), 1);
+    var key = await crypto.subtle.importKey("raw", raw, {name: "ECDSA", namedCurve: "P-256"}, false, ["verify"]);
+    return crypto.subtle.verify({name: "ECDSA", hash: "SHA-256"}, key, sig, utf16le(text));
+  }
+
+  function parse(hash){
+    var dot = hash.lastIndexOf(".");
+    if (dot < 0) throw new Error("format");
+    var bytes = b64urlBytes(hash.slice(0, dot));
+    var sig = b64urlBytes(hash.slice(dot + 1));
+    var text = decodeB1(bytes);
+    var f = text.split(US);
+    if (f[0] !== "B1" || f.length < 24) throw new Error("format");
+    var items = (f[23] || "").split(RS).filter(Boolean).map(function(r){
+      var x = r.split(GS); return {job: x[0], code: x[1], name: x[2], qty: x[3], pal: x[4], loose: x[5] === "1"};
+    });
+    return {text: text, sig: sig, kid: f[1], issuer: f[2], type: f[3], title: f[4], no: f[5], at: f[6], status: f[7],
+      party: f[8], partyCode: f[9], po: f[10], unit: f[11], totQty: f[12], palFull: f[13], palLoose: f[14], count: Number(f[15]) || items.length,
+      driver: f[16], driverPhone: f[17], plate: f[18], officer: f[19], keeper: f[20], seal: f[21], phone: f[22], items: items};
+  }
+
+  function el(root, name){ return root.querySelector('[data-f="' + name + '"]'); }
+  function set(root, name, v){ var e = el(root, name); if (e) e.textContent = v; return e; }
+
+  function render(d, verdict){
+    var app = document.getElementById("app");
+    app.innerHTML = "";
+    app.appendChild(document.getElementById("tpl").content.cloneNode(true));
+    var reg = KEYS[d.kid] || {};
+    if (reg.c) document.documentElement.style.setProperty("--accent", reg.c);
+    var issuer = reg.n || d.issuer || "—";
+    set(app, "issuer", issuer);
+    if (!reg.n) set(app, "issuerCap", "الاسم المكتوب في الرمز");
+    set(app, "initials", reg.i || initials(reg.en || issuer));
+    document.title = (d.title || "مستند") + " " + d.no + " · " + issuer;
+
+    // verdict
+    var v = el(app, "verdict"), icon = ICON_OK;
+    if (verdict.kind !== "ok"){ v.classList.add(verdict.kind); icon = verdict.kind === "bad" ? ICON_BAD : ICON_WARN; }
+    el(app, "vicon").innerHTML = icon;
+    set(app, "vtitle", verdict.title);
+    set(app, "vsub", verdict.sub);
+    set(app, "vpill", verdict.pill);
+    var now = new Date();
+    set(app, "vtime", "تم الفحص " + timeAr(now.getHours(), String(now.getMinutes()).padStart(2, "0")));
+    if (verdict.alert){ var a = el(app, "alert"); a.textContent = verdict.alert; a.classList.remove("hide"); if (verdict.kind === "warn") a.classList.add("warn"); }
+    if (verdict.dim) app.classList.add("dim");
+
+    // document
+    set(app, "title", d.title || "مستند");
+    set(app, "titleEn", TITLES_EN[d.type] || "");
+    set(app, "no", d.no);
+    var at = d.at || "";
+    if (at.length >= 12){
+      set(app, "date", at.slice(6, 8) + "-" + at.slice(4, 6) + "-" + at.slice(0, 4));
+      set(app, "time", timeAr(at.slice(8, 10), at.slice(10, 12)));
+    }
+    var st = set(app, "status", d.status === "C" ? "ملغي" : "معتمد");
+    if (d.status === "C") st.classList.add("bad");
+
+    // party
+    if (d.type === "TRANSFER") set(app, "partyCap", "إلى فرع");
+    if (d.party){
+      set(app, "party", d.party);
+      var kv = el(app, "partyKv");
+      if (d.partyCode){
+        kv.innerHTML = '<span>الكود <b class="num"></b></span>';
+        kv.querySelector("b").textContent = d.partyCode;
+      }
+      var pos = el(app, "pos");
+      String(d.po || "").split(" · ").filter(Boolean).forEach(function(p){
+        var t = document.createElement("span"); t.className = "tag"; t.textContent = p; pos.appendChild(t);
+      });
+      if (!pos.children.length) pos.classList.add("hide");
+    } else el(app, "partyCard").classList.add("hide");
+
+    // items
+    set(app, "itemsCnt", d.count + (d.count === 1 ? " صنف" : (d.count === 2 ? " صنفان" : (d.count <= 10 ? " أصناف" : " صنف"))));
+    var box = el(app, "items");
+    d.items.forEach(function(it){
+      var row = document.createElement("div"); row.className = "it";
+      var pal = Number(it.pal) || 0, lp = it.loose ? 1 : 0;
+      var palTxt = pal ? fmt(pal) + " بالتة" + (lp ? " + فرط" : "") : (lp ? "فرط" : "");
+      row.innerHTML = '<div class="main"><span class="job num"></span><span class="code num"></span><div class="nm"></div></div>' +
+        '<div class="qty"><b class="num"></b><small></small></div>';
+      row.querySelector(".job").textContent = it.job;
+      row.querySelector(".code").textContent = it.code || "";
+      var nm = row.querySelector(".nm"); if (it.name) nm.textContent = it.name; else nm.remove();
+      row.querySelector(".qty b").textContent = fmt(it.qty);
+      row.querySelector(".qty small").textContent = palTxt || d.unit;
+      box.appendChild(row);
+    });
+    if (d.count > d.items.length){
+      var more = document.createElement("div"); more.className = "more";
+      more.textContent = "+ " + (d.count - d.items.length) + " أصناف أخرى في الإذن المطبوع";
+      box.after(more);
+    }
+    set(app, "totQty", fmt(d.totQty));
+    set(app, "unit", d.unit || "");
+    var pf = Number(d.palFull) || 0, pl = Number(d.palLoose) || 0;
+    set(app, "totPal", fmt(pf + pl));
+    set(app, "palEq", pl ? (fmt(pf) + " كاملة + " + fmt(pl) + " فرط") : "كاملة");
+
+    // transport and people
+    if (d.driver){ set(app, "driver", d.driver); var ph = phoneOf(d.driverPhone); if (ph){ var c = el(app, "driverCall"); c.href = "tel:" + ph; c.classList.remove("hide"); } }
+    else el(app, "driverRow").classList.add("hide");
+    if (d.plate){ var parts = d.plate.split(" / "); set(app, "plate", parts[0]); if (parts[1]) set(app, "trailer", "مقطورة " + parts[1]); }
+    else el(app, "plateRow").classList.add("hide");
+    if (d.officer) set(app, "officer", d.officer); else el(app, "officerRow").classList.add("hide");
+    if (d.keeper) set(app, "keeper", d.keeper); else el(app, "keeperRow").classList.add("hide");
+    if (!d.driver && !d.plate && !d.officer && !d.keeper) el(app, "moveCard").classList.add("hide");
+
+    // seal, contact, share
+    set(app, "seal", d.seal || "—");
+    el(app, "copy").addEventListener("click", function(){
+      var b = this; if (navigator.clipboard) navigator.clipboard.writeText(d.seal).then(function(){ b.querySelector("span").textContent = "تم النسخ"; });
+    });
+    set(app, "noteText", verdict.note);
+    var office = phoneOf(d.phone) || phoneOf(reg.t);
+    if (office){ var oc = el(app, "officeCall"); oc.href = "tel:" + office; oc.classList.remove("hide"); }
+    el(app, "share").addEventListener("click", function(){
+      var t = (d.title || "") + " " + d.no + " · " + issuer + " · " + verdict.title;
+      if (navigator.share) navigator.share({title: t, text: t, url: location.href}).catch(function(){});
+      else if (navigator.clipboard) navigator.clipboard.writeText(location.href);
+    });
+  }
+
+  function fail(title, sub){
+    var app = document.getElementById("app");
+    app.innerHTML = '<div class="land"><div class="lg" style="background:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg></div><h1></h1><p></p></div>';
+    app.querySelector("h1").textContent = title;
+    app.querySelector("p").textContent = sub;
+  }
+
+  async function main(){
+    var hash = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+    if (!hash) return;
+    var d;
+    try { d = parse(hash); }
+    catch (e){ fail("هذا الرمز ليس رمز إذن صالحًا", "تمت قراءة الرمز لكن بياناته ناقصة أو معدّلة. اطلب نسخة جديدة من الإذن أو تواصل مع الجهة المصدرة."); return; }
+    var reg = KEYS[d.kid];
+    var name = (reg && reg.n) || d.issuer;
+    var note = "الحالة المعروضة هي حالة الإذن وقت طباعته. عند أي شك تواصل مع مكتب الشحن لدى " + name + " واذكر الختم الرقمي.";
+    if (!reg){
+      render(d, {kind: "warn", title: "جهة غير مسجلة", sub: "الجهة المصدرة لهذا الإذن غير مسجلة في BINOVA", pill: "تعذّر التأكد",
+        alert: "البيانات معروضة كما هي في الرمز، ولا يمكن التأكد من أنها أصلية. تأكد من الجهة المصدرة قبل الاستلام.", note: note});
+      return;
+    }
+    var ok = null;
+    try { ok = await verifySig(reg.p, d.text, d.sig); } catch (e){ ok = false; }
+    if (ok === null){
+      render(d, {kind: "warn", title: "التحقق غير متاح", sub: "هذا المتصفح لا يدعم فحص التوقيع الرقمي", pill: "افتحه في Chrome أو Safari",
+        alert: "افتح الرابط في متصفح حديث (Chrome أو Safari) لفحص التوقيع.", note: note});
+    } else if (!ok){
+      render(d, {kind: "bad", title: "هذا الإذن غير أصلي", sub: "التوقيع الرقمي غير مطابق: البيانات معدّلة أو الإذن مزوّر", pill: "التوقيع غير صحيح",
+        alert: "لا تستلم أي بضاعة بهذا الإذن. البيانات أدناه غير موثوقة.", note: note, dim: true});
+    } else if (d.status === "C"){
+      render(d, {kind: "bad", title: "هذا الإذن ملغي", sub: "مستند أصلي صادر من " + name + " لكنه أُلغي", pill: "التوقيع سليم",
+        alert: "أُلغي هذا الإذن من الجهة المصدرة، ولا يجوز الاستلام به.", note: note});
+    } else {
+      render(d, {kind: "ok", title: "إذن أصلي", sub: "التوقيع الرقمي سليم ومطابق لـ " + name, pill: "التوقيع الرقمي سليم", note: note});
+    }
+  }
+  window.addEventListener("hashchange", function(){ location.reload(); });
+  main();
+})();
+</script>
+</body>
+</html>
