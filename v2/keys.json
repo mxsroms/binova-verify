@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "keys": [
+    {
+      "kid": "xNWnPHxLR_Kc8jAY",
+      "publicKey": "MCowBQYDK2VwAyEAR9m-FfKYbml3lIYrl02yG0cjvEcYD7Orp5hClAwU03Q",
+      "issuer": "BINOVA · مخازن المصنع"
+    },
+    {
+      "kid": "CSPrSge1en1nV58Y",
+      "publicKey": "MCowBQYDK2VwAyEAGijPxM6Nm3eczdcj-581GCTOf1OyLEH3QskoVnDe_-E",
+      "issuer": "BINOVA · بيانات تجريبية",
+      "demo": true
+    }
+  ]
+}

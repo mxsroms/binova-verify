@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>التحقق من أذون المخازن | BINOVA</title>
+  <link rel="stylesheet" href="./verify.css">
+  <script type="module" src="./page.js"></script>
+</head>
+<body>
+  <header class="mast"><div class="wrap brand"><b lang="en">BINOVA</b><span>التحقق من الأذون</span></div></header>
+  <main class="wrap">
+    <article aria-labelledby="title">
+      <div id="verdict" role="status" aria-live="polite">
+        <h1 id="title">التحقق من إذن</h1>
+        <p id="message">امسح رمز QR المطبوع على إذن BINOVA لعرض بياناته والتحقق من توقيع الجهة المصدرة.</p>
+      </div>
+      <div id="verified" hidden>
+        <dl id="fields"></dl>
+        <p class="note" id="status-note"></p>
+        <section id="details" hidden></section>
+        <div class="lookup">
+          <button type="button" id="lookup">عرض آخر نسخة منشورة</button>
+          <p>يرسل هذا الخيار بصمة الإذن إلى موقع التحقق للبحث عن التفاصيل وتاريخ آخر تحديث نشره المصنع.</p>
+          <p id="lookup-result" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <noscript><p>فعّل JavaScript حتى يستطيع المتصفح التحقق من التوقيع الرقمي.</p></noscript>
+    </article>
+  </main>
+</body>
+</html>
