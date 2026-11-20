@@ -7,7 +7,13 @@
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0F1B26">
 <title>التحقق من المستند · BINOVA</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1B26'/%3E%3Cpath d='M20 33l8 8 16-18' fill='none' stroke='%2337C27E' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="./v2/binova-mark.png" type="image/png">
+<script>
+  // The original printed format is verified below. Current links resolve on v2.
+  if (!location.search && (!location.hash || location.hash.startsWith("#v="))) {
+    location.replace("./v2/" + location.hash);
+  }
+</script>
 <style>
 @font-face{font-family:"Plex Arabic";src:url(fonts/plex-arabic-400.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
 @font-face{font-family:"Plex Arabic";src:url(fonts/plex-arabic-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
@@ -150,9 +156,13 @@ body{background:var(--bg);color:var(--ink);font-family:"Plex Arabic","Segoe UI",
 .land .lg svg{width:40px;height:40px}
 .land h1{font-size:22px;font-weight:700}
 .land p{color:var(--muted);font-size:14.5px;max-width:320px}
+.legacy-brand{background:#0d2038;color:#f7fbff;display:flex;align-items:center;justify-content:space-between;padding:10px max(16px,calc((100vw - 860px)/2));font-family:"Segoe UI",Tahoma,sans-serif}
+.legacy-lockup{display:flex;align-items:center;gap:8px}.legacy-lockup img{border-radius:4px;object-fit:contain}.legacy-lockup strong,.legacy-lockup small{display:block;line-height:1.1}.legacy-lockup strong{font-size:20px;letter-spacing:.045em}.legacy-lockup small{font-size:10px;letter-spacing:.13em;color:#c8d7ec;margin-top:2px}.legacy-brand a{color:#e3f0ff;font-size:14px}
+@media print{.legacy-brand{display:none}}
 </style>
 </head>
 <body>
+<div class="legacy-brand"><div class="legacy-lockup" dir="ltr" lang="en"><img src="./v2/binova-mark.png" width="32" height="36" alt=""><div><strong>BINOVA</strong><small>ERP</small></div></div><a href="./v2/">بوابة التحقق</a></div>
 <div class="wrap" id="app">
   <div class="land" id="landing">
     <div class="lg"><svg viewBox="0 0 24 24" fill="none" stroke="#37C27E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></div>

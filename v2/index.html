@@ -2,34 +2,87 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
-  <title>التحقق من أذون المخازن | BINOVA</title>
-  <link rel="stylesheet" href="./verify.css">
-  <script type="module" src="./page.js"></script>
+  <meta name="theme-color" content="#0d2038">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>التحقق من الأذون | BINOVA</title>
+  <link rel="icon" href="./binova-mark.png" type="image/png">
+  <link rel="stylesheet" href="./verify.css?ui=binova-2">
+  <script type="module" src="./page.js?ui=binova-2"></script>
 </head>
-<body>
-  <header class="mast"><div class="wrap brand"><b lang="en">BINOVA</b><span>التحقق من الأذون</span></div></header>
+<body data-state="empty">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="ic-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.3"/><rect x="15" y="3" width="6" height="6" rx="1.3"/><rect x="3" y="15" width="6" height="6" rx="1.3"/><path d="M13 13h3v3h5v5h-3m-5-5v5h2m6-10v2M11 5v2M5 11h3"/></symbol>
+    <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M5 3h9l5 5v13H5zM14 3v6h5M8.5 13h7M8.5 17h5"/></symbol>
+    <symbol id="ic-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10.7v5.7M12 7.4h.02"/></symbol>
+    <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-5L3.5 9M4 13a8 8 0 0 0 14 5l2.5-3M3.5 4v5h5M20.5 20v-5h-5"/></symbol>
+    <symbol id="ic-link" viewBox="0 0 24 24"><path d="m10 13 4-4M8.5 16.6l-1 1a4.2 4.2 0 0 1-6-6l4-4a4.2 4.2 0 0 1 6 0m1 8.8a4.2 4.2 0 0 0 6 0l4-4a4.2 4.2 0 0 0-6-6l-1 1" transform="translate(0 0) scale(.98)"/></symbol>
+    <symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M20 12H4m6-6-6 6 6 6"/></symbol>
+    <symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8.5 10V7a3.5 3.5 0 0 1 7 0v3M12 14v3"/></symbol>
+  </svg>
+  <header class="mast">
+    <div class="mast-inner">
+      <div class="identity"><div class="brand" dir="ltr" lang="en"><img src="./binova-mark.png" width="36" height="41" alt=""><div><strong>BINOVA</strong><small>ERP</small></div></div><span class="service-name">التحقق من الأذون</span></div>
+      <a id="new-verification" class="quiet-button" href="./" hidden><svg class="icon" aria-hidden="true"><use href="#ic-qr"/></svg><span>تحقّق من إذن آخر</span></a>
+    </div>
+  </header>
   <main class="wrap">
-    <article aria-labelledby="title">
-      <div id="verdict" role="status" aria-live="polite">
-        <h1 id="title">التحقق من إذن</h1>
-        <p id="message">امسح رمز QR المطبوع على إذن BINOVA لعرض بياناته والتحقق من توقيع الجهة المصدرة.</p>
-      </div>
-      <div id="verified" hidden>
-        <dl id="fields"></dl>
-        <p class="note" id="status-note"></p>
-        <section id="details" hidden></section>
-        <div class="lookup">
-          <button type="button" id="lookup">عرض آخر نسخة منشورة</button>
-          <p>يرسل هذا الخيار بصمة الإذن إلى موقع التحقق للبحث عن التفاصيل وتاريخ آخر تحديث نشره المصنع.</p>
-          <p id="lookup-result" role="status" aria-live="polite"></p>
+    <section class="credential" aria-labelledby="title">
+      <div id="verdict" data-state="empty" role="status" aria-live="polite" aria-atomic="true">
+        <div class="verdict-copy">
+          <h1 id="title">التحقق من إذن</h1>
+          <p id="message">امسح رمز QR المطبوع على الإذن أو الصق رابط التحقق أدناه.</p>
+        </div>
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200" fill="none" focusable="false">
+            <g class="dial" stroke="currentColor">
+              <circle cx="100" cy="100" r="92" stroke-width="1.2"/>
+              <circle cx="100" cy="100" r="83" stroke-width="5" stroke-dasharray="1 4.795" opacity=".7"/>
+              <circle cx="100" cy="100" r="72" stroke-width=".8" opacity=".62"/>
+              <path d="M100 8v12m0 160v12M8 100h12m160 0h12" stroke-width="2"/>
+            </g>
+            <g class="seal-glyph" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <path class="seal-shield" d="M100 53c11 8 22 11 36 13v27c0 25-13 42-36 54-23-12-36-29-36-54V66c14-2 25-5 36-13Z"/>
+              <path class="state-mark mark-ok" d="m83 99 12 12 23-25"/>
+              <path class="state-mark mark-bad" d="m89 88 22 22m0-22-22 22"/>
+              <path class="state-mark mark-cancel" d="M86 99h28"/>
+              <path class="state-mark mark-checking" d="M100 83v17l10 6"/>
+              <g class="state-mark mark-scan"><path d="M70 83V71h13m34 0h13v12m0 34v12h-13m-34 0H70v-12"/><path d="M84 85h10v10H84zm22 0h10v10h-10zm-22 22h10v10H84zm21 0h6v6h6m-12 4h3"/></g>
+            </g>
+          </svg>
         </div>
       </div>
-      <noscript><p>فعّل JavaScript حتى يستطيع المتصفح التحقق من التوقيع الرقمي.</p></noscript>
-    </article>
+      <dl id="summary-strip" class="summary-strip" hidden>
+        <div><dt>رقم الإذن</dt><dd id="summary-number" class="number-code" dir="ltr"></dd></div>
+        <div><dt>نوع الإذن</dt><dd id="summary-type"></dd></div>
+        <div id="summary-quantity-field" hidden><dt id="summary-quantity-label">إجمالي الكمية</dt><dd id="summary-quantity"></dd></div>
+      </dl>
+    </section>
+    <section id="entry-panel" class="panel entry-panel" aria-labelledby="entry-heading" hidden>
+      <h2 id="entry-heading"><svg class="icon heading-icon" aria-hidden="true"><use href="#ic-link"/></svg>التحقق برابط الإذن</h2>
+      <form id="verify-form">
+        <label for="verify-input">رابط التحقق الموجود في رمز QR</label>
+        <div class="form-row"><input id="verify-input" name="voucher" type="text" inputmode="text" autocomplete="off" spellcheck="false" dir="ltr" aria-describedby="input-message" placeholder="https://…"><button type="submit" class="primary-button">تحقّق من الإذن<svg class="icon" aria-hidden="true"><use href="#ic-arrow"/></svg></button></div>
+        <p id="input-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <div id="verified" hidden>
+      <section class="panel metadata" aria-labelledby="metadata-title">
+        <h2 id="metadata-title"><svg class="icon heading-icon" aria-hidden="true"><use href="#ic-doc"/></svg>بيانات الإذن</h2>
+        <dl id="fields"></dl>
+        <div class="note"><svg class="icon" aria-hidden="true"><use href="#ic-info"/></svg><p id="status-note"></p></div>
+      </section>
+      <section id="details" aria-label="تفاصيل الإذن" hidden></section>
+      <div class="lookup">
+        <button id="lookup" class="quiet-button" type="button"><svg class="icon" aria-hidden="true"><use href="#ic-refresh"/></svg>عرض آخر نسخة منشورة</button>
+        <p>يرسل هذا الطلب بصمة الإذن للبحث عن تحديث نشره المصنع.</p>
+        <p id="lookup-result" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+    <noscript><p class="panel">فعّل JavaScript ليتمكن المتصفح من فحص توقيع الإذن.</p></noscript>
   </main>
+  <footer class="site-footer"><svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg><span>يُفحص التوقيع الرقمي على جهازك</span></footer>
 </body>
 </html>
