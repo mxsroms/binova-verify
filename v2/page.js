@@ -36,7 +36,8 @@ function renderSummary(result, state, published) {
   $("fields").replaceChildren();
   field("الجهة المصدرة", result.issuer);
   field("رقم الإذن", result.payload.n);
-  field("نوع الإذن", types.get(result.payload.t) || result.payload.t);
+  const type = result.payload.t;
+  field("نوع الإذن", type === "ISSUE" && result.payload.dn === true ? "إذن تسليم" : (types.get(type) || type));
   field("تاريخ الإذن", result.payload.d);
   if (result.payload.j) field("أمر الشغل", result.payload.j);
   field("الحالة وقت التوقيع", cancelled ? "ملغى" : "مرحّل");
